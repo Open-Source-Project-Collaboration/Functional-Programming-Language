@@ -47,7 +47,10 @@ while i < 10:
 mod math
 use math.sqrt
 
-25 |> sqrt |> str |> print	# prints 5
+let twenty_five = sqr 5
+let five = sqrt twenty_five
+
+five |> str |> print	# prints 5
 
 
 # Enums
@@ -67,7 +70,7 @@ match colour
 	Blue =>
 		print 'It is blue'
 	_ =>
-		print 'THERE IS NOT SUCH COLOUR'
+		print 'THERE IS NO SUCH COLOUR'
 
 
 # Struct/class alike models
@@ -80,6 +83,6 @@ let barry = Dog(Colours.Red, 42)
 
 # Methods for models
 let bark<Dog> what_to_bark =
-	print what_to_bark
+	print 'Dog, {self.size} with colour {self.colour} says {what_to_bark}'
 
 barry.bark('MY NAME IS BARRY')
