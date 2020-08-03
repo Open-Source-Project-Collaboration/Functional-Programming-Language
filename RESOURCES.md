@@ -19,5 +19,10 @@ This is a currated list of resources used by the contributors:
 - Static program analysis: https://cs.au.dk/~amoeller/spa/
 
 
+## About the build system
+- Premake by the cherno: https://www.youtube.com/watch?v=sULV3aB2qeU
+- Premake wiki: https://github.com/premake/premake-core/wiki
+
+
 ## A little note
 Please create a new issue for proposals to add more resources here
