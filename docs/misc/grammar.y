@@ -24,9 +24,12 @@ lval <- fcall
 # Function calls
 fcall <- NAME args
 
-args <- args literal
-      | literal literal
-      | literal
+args <- args arg
+      | arg arg
+      | arg
+
+arg <- '(' lval ')'
+     | literal
 
 
 # Math
