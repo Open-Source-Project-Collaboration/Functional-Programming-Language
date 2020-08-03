@@ -1,4 +1,4 @@
-# 03 - Coding Style and Conventions
+# 02 - Coding Style and Conventions
 
 This project uses
 
