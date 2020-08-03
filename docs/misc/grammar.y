@@ -13,6 +13,11 @@ statement <- comment
 comment <- r'#.*\n'
 
 
+# Importing modules
+mod <- 'mod' NAME
+use <- 'use' dotop
+
+
 # Loops
 for <- 'for' NAME 'in' lval ':' defbody
 while <- 'while' condition ':' defbody

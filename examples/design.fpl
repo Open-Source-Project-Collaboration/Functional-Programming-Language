@@ -43,7 +43,7 @@ while i < 10:
 	i += 1
 
 
-# Importing libs
+# Importing modules
 mod math
 use math.sqrt
 
