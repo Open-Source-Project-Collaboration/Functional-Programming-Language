@@ -86,7 +86,7 @@ if (parser.error)
 
 
 
-# Optimizing
+## Optimizing
 
 Likewise checking, optimizing stage also has multiple passes.
 But you can always use `ast_optimize_all(node_t *ast)`.
