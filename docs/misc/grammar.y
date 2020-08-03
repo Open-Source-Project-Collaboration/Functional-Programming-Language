@@ -5,24 +5,32 @@ statements <- statements statement
 
 statement <- comment
            | fcall
-	   | vardef
+	   | def
 
 comment <- r'#.*\n'
 
 
-# Variables
-vardef <- im_vardef
-        | mut_vardef
+# Function/variable definitions
+def <- 'let' ['mut'] NAME [defargs] '=' defbody
 
-im_vardef <- 'let' NAME [':' TYPE] ['=' lval]
-mut_vardef <- 'let' 'mut' NAME [':' TYPE] ['=' lval]
+defargs <- defargs defarg
+          | defarg defarg
+	  | defarg
+
+defarg <- NAME [':' TYPE]
+
+defbody <- lval
+         | block
 
 lval <- fcall
       | expr
 
+block <- INDENT statemets DEDENT
+
 
 # Function calls
-fcall <- NAME args
+fcall <- rval args
+       | rval '(' args ')'
 
 args <- args arg
       | arg arg
@@ -30,6 +38,12 @@ args <- args arg
 
 arg <- '(' lval ')'
      | literal
+
+
+# Dot operator
+rval <- dotop '.' NAME
+       | NAME '.' NAME
+       | NAME
 
 
 # Math
