@@ -1,0 +1,82 @@
+# Comments are like this
+
+
+# Print function only accepts a string
+print 'Hello World!'
+
+
+# Variables
+let x: str = 'Hi World!'
+
+
+# This is mutable
+let mut y: int = 5
+
+
+# Functions
+let sqr x =
+	# It deduces type here
+	let x_again = x
+	x * x_again
+
+
+# File IO
+let filename = 'design.fpl'
+let file = open(filename)
+
+# Conditional flow
+if file.is_open:
+	file.size |> str |> print
+	file.close()
+else:
+	print 'Can not open file'
+
+
+# Loops
+let arr = [1; 2; 3; 4]
+for num in arr:
+	num |> str |> print
+
+let mut i = 0
+while i < 10:
+	print "Meow"
+	i += 1
+
+
+# Importing libs
+mod math
+use math.sqrt
+
+25 |> sqrt |> str |> print	# prints 5
+
+
+# Enums
+type Colours
+	= Red
+	| Green
+	| Blue
+
+
+# Matching enums
+let colour = Colours.Red
+match colour {
+	Red => print 'It is red',
+	Green => print 'It is green',
+	Blue => print 'It is blue',
+	_ => print 'THERE IS NOT SUCH COLOUR'
+}
+
+
+# Struct/class alike models
+type Dog =
+	skin_colour: Colour
+	size: int
+
+# Initializing new models
+let barry = Dog(Colours.Red, 42)
+
+# Methods for models
+let bark<Dog> what_to_bark =
+	print what_to_bark
+
+barry.bark('MY NAME IS BARRY')
