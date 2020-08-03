@@ -12,7 +12,7 @@ You can start by reading [the docs](docs/01%20-%20Getting%20Started.md)
 
 - [premake5](https://premake.github.io/): as the build system
 - [clang](https://clang.llvm.org/): as the compiler
-- [neovim](https://neovim.io/): (to those who can use) as the code editor
+- [neovim](https://neovim.io/): (for those who can use) as the code editor
 - [vscode](https://code.visualstudio.com/): (for those who can't) as the IDE
 
 
