@@ -76,7 +76,7 @@ condition <- condition LOGIC_OP condition
 
 
 # Function/variable definitions
-def <- 'let' ['mut'] NAME [defargs] '=' defbody
+def <- 'let' ['mut'] NAME ['<' NAME '>'] [defargs] '=' defbody
 
 defargs <- defargs defarg
           | defarg defarg
