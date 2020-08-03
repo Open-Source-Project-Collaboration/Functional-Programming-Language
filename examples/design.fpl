@@ -59,12 +59,15 @@ type Colours
 
 # Matching enums
 let colour = Colours.Red
-match colour {
-	Red => print 'It is red',
-	Green => print 'It is green',
-	Blue => print 'It is blue',
-	_ => print 'THERE IS NOT SUCH COLOUR'
-}
+match colour
+	Red =>
+		print 'It is red'
+	Green =>
+		print 'It is green'
+	Blue =>
+		print 'It is blue'
+	_ =>
+		print 'THERE IS NOT SUCH COLOUR'
 
 
 # Struct/class alike models
