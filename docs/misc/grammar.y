@@ -9,8 +9,29 @@ statement <- comment
 	   | if
 	   | for
 	   | while
+	   | mod
+	   | use
+	   | type
 
 comment <- r'#.*\n'
+
+
+# Type definitions
+type <- 'type' NAME '=' [enum_or_struct]
+
+enum <- enum '|' NAME
+      | NAME '|' NAME
+
+struct <- INDENT structdefs DEDENT
+
+structdefs <- structdefs structdef
+            | structdef structdef
+	    | structdef
+
+structdef <- NAME ':' TYPE
+
+enum_or_struct <- enum
+                | struct
 
 
 # Importing modules
