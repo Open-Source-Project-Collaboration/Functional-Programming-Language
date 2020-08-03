@@ -5,20 +5,17 @@ Currently there's no code avaiable
 
 ## Development
 
-You can start by reading [the docs](docs/01%20-%20Getting%20Started.md)
+You can read [the docs here](docs/01%20-%20Getting%20Started.md) and if you ever
+happen to stuck, we probably have a tutorial for it in [here](RESOURCES.md)!
 
-But simply but, to build the project
+For the moment, generate your build files:
 
-- for windows: `premake5 vs2019`
-- for linux: `premake5 gmake`
-- for mac: `premake5 xcode4`
-
-These generate build files for the appropriate OS.
+- windows: `premake5 vs2019`
+- linux: `premake5 gmake`
+- mac: `premake5 xcode4`
 
 You can then use your favoured platform (Visual studio, XCode, Linux etc.)
-to build the binaries/libraries.
-
-All built files go into __bin/__.
+to build the binaries/libraries. All built files go into __bin/__.
 
 
 ## Tech stack
