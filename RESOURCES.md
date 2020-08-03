@@ -12,7 +12,7 @@ This is a currated list of resources used by the contributors:
 
 
 ## Books and articles
-- The dragonbook: http://libgen.is/book/index.php?md5=565E50D1C6013C3D8A56D268EE55421F
+- The dragonbook: (no link)
 - Crafting interpreters: https://craftinginterpreters.com/
 - One-pass compiler primer: https://keleshev.com/one-pass-compiler-primer
 - Kaleidoscope language by LLVM project: https://llvm.org/docs/tutorial/OCamlLangImpl1.html
