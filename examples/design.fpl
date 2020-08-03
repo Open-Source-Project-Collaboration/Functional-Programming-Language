@@ -79,10 +79,10 @@ type Dog =
 	size: int
 
 # Initializing new models
-let barry = Dog(Colours.Red, 42)
+let barry = Dog.new Colours.Red 42
 
 # Methods for models
 let bark<Dog> what_to_bark =
 	print 'Dog, {self.size} with colour {self.colour} says {what_to_bark}'
 
-barry.bark('MY NAME IS BARRY')
+barry.bark 'MY NAME IS BARRY'

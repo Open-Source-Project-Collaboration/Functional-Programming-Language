@@ -19,17 +19,15 @@ comment <- r'#.*\n'
 
 
 # Matching
-match <- 'match' matchval ':' matchbody
+match <- 'match' expr ':' matchbody
 
-matchval <- dotop
-          | lval
+matchbody <- INDENT match_statements DEDENT
 
-matchbody <- matchbody match_statement
-           | match_statement match_statement
-	   | match_statement
-	   | 'empty'
+match_statements <- match_statements match_statement
+                  | match_statement match_statement
+		  | match_statement
 
-match_statement <- NAME '=>' block
+match_statement <- NAME '=>' defbody
 
 
 # Type definitions
@@ -73,9 +71,8 @@ elif_or_else <- elif
               | else
 
 condition <- condition LOGIC_OP condition
-           | condition CMP_OP lval
-           | lval CMP_OP lval
-	   | lval
+           | condition CMP_OP expr
+           | expr CMP_OP expr
 
 
 # Function/variable definitions
@@ -90,26 +87,23 @@ defarg <- NAME [':' TYPE]
 defbody <- pipe
          | block
 
-pipe <- pipe '|>' lval
-      | lval '|>' lval
-      | lval
-
-lval <- fcall
+pipe <- pipe '|>' expr
+      | expr '|>' expr
       | expr
 
 block <- INDENT statemets DEDENT
 
 
 # Function calls
-fcall <- dotop args
-       | dotop '(' args ')'
+fcall <- dotop [args]
+       | dotop '(' [args] ')'
 
 args <- args arg
       | arg arg
       | arg
 
-arg <- '(' lval ')'
-     | literal
+arg <- '(' pipe ')'
+     | primitive
 
 
 # Dot operator
@@ -133,14 +127,17 @@ fact <- '(' expr ')'
 
 # Primitives
 array <- '[' tuple ']'
-       | '[' lval ']'
+       | '[' pipe ']'
 
-tuple <- tuple ';' lval
-       | lval ';' lval
+tuple <- tuple ';' pipe
+       | pipe ';' pipe
 
-literal <- NAME
-         | INT
-	 | FLOAT
-	 | STR
-	 | BOOL
-	 | array
+literal <- fcall
+         | primitive
+
+primitive <- NAME
+           | INT
+	   | FLOAT
+	   | STR
+	   | BOOL
+	   | array
