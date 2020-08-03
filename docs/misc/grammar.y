@@ -6,8 +6,25 @@ statements <- statements statement
 statement <- comment
            | fcall
 	   | def
+	   | if
 
 comment <- r'#.*\n'
+
+
+# Conditional flow
+if <- 'if' condition ':' block [elif_or_else]
+
+elif <- 'elif' condition ':' block [elif_or_else]
+
+else <- 'else' ':' block
+
+elif_or_else <- elif
+              | else
+
+condition <- condition LOGIC_OP condition
+           | condition CMP_OP lval
+           | lval CMP_OP lval
+	   | lval
 
 
 # Function/variable definitions
@@ -19,8 +36,12 @@ defargs <- defargs defarg
 
 defarg <- NAME [':' TYPE]
 
-defbody <- lval
+defbody <- pipe
          | block
+
+pipe <- pipe '|>' lval
+      | lval '|>' lval
+      | lval
 
 lval <- fcall
       | expr
