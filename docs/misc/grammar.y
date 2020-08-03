@@ -12,8 +12,24 @@ statement <- comment
 	   | mod
 	   | use
 	   | type
+	   | match
+	   | 'empty'
 
 comment <- r'#.*\n'
+
+
+# Matching
+match <- 'match' matchval ':' matchbody
+
+matchval <- dotop
+          | lval
+
+matchbody <- matchbody match_statement
+           | match_statement match_statement
+	   | match_statement
+	   | 'empty'
+
+match_statement <- NAME '=>' block
 
 
 # Type definitions
@@ -21,6 +37,7 @@ type <- 'type' NAME '=' [enum_or_struct]
 
 enum <- enum '|' NAME
       | NAME '|' NAME
+      | NAME
 
 struct <- INDENT structdefs DEDENT
 
@@ -29,6 +46,7 @@ structdefs <- structdefs structdef
 	    | structdef
 
 structdef <- NAME ':' TYPE
+           | 'empty'
 
 enum_or_struct <- enum
                 | struct
@@ -83,8 +101,8 @@ block <- INDENT statemets DEDENT
 
 
 # Function calls
-fcall <- rval args
-       | rval '(' args ')'
+fcall <- dotop args
+       | dotop '(' args ')'
 
 args <- args arg
       | arg arg
@@ -95,7 +113,7 @@ arg <- '(' lval ')'
 
 
 # Dot operator
-rval <- dotop '.' NAME
+dotop <- dotop '.' NAME
        | NAME '.' NAME
        | NAME
 

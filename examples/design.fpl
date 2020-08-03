@@ -62,7 +62,7 @@ type Colours
 
 # Matching enums
 let colour = Colours.Red
-match colour
+match colour:
 	Red =>
 		print 'It is red'
 	Green =>
