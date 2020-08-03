@@ -7,8 +7,15 @@ statement <- comment
            | fcall
 	   | def
 	   | if
+	   | for
+	   | while
 
 comment <- r'#.*\n'
+
+
+# Loops
+for <- 'for' NAME 'in' lval ':' defbody
+while <- 'while' condition ':' defbody
 
 
 # Conditional flow
