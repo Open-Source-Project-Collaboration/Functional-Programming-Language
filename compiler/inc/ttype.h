@@ -8,9 +8,65 @@
 
 /* list of tokens */
 #define TTYPES\
+	/* invincibles */\
 	X(PENDING)\
 	X(ERR)\
 	X(EOF)\
+	X(INDENT)\
+	X(DEDENT)\
+	\
+	/* literals */\
+	X(NAME)\
+	X(INT)\
+	X(FLOAT)\
+	X(STR)\
+	X(BOOL)\
+	\
+	/* keywords */\
+	X(LET)\
+	X(MUT)\
+	X(MOD)\
+	X(USE)\
+	X(TYPE)\
+	X(MATCH)\
+	\
+	/* punctuation */\
+	X(COLON)\
+	X(DOT)\
+	X(LPAR)\
+	X(RPAR)\
+	X(LBRAC)\
+	X(LBRAC)\
+	X(SEMI)\
+	X(PIPE)\
+	X(ARROW)\
+	\
+	/* math ops */\
+	X(EQ)\
+	X(PLUS)\
+	X(PLUSEQ)\
+	X(MINUS)\
+	X(MINUSEQ)\
+	X(STAR)\
+	X(STAREQ)\
+	X(DSTAR)\
+	X(DSTAREQ)\
+	X(SLASH)\
+	X(SLASHEQ)\
+	X(DSLASH)\
+	X(DSLASHEQ)\
+	\
+	/* logic ops */\
+	X(DEQ)\
+	X(NOTEQ)\
+	X(AND)\
+	X(OR)\
+	X(NOT)\
+	X(LESS)\
+	X(LESSEQ)\
+	X(GREATER)\
+	X(GREATEREQ)\
+	\
 	X(LAST)
 
 
