@@ -1,5 +1,5 @@
-project "fpl"
-	kind "ConsoleApp"
+project "vm"
+	kind "StaticLib"
 	language "C"
 
 	includedirs { "inc" }

@@ -16,4 +16,6 @@ workspace "fpl"
 		defines { "NDEBUG" }
 		optimize "on"
 
-include "fpl"
+include "vm"
+include "compiler"
+include "cli"
