@@ -32,9 +32,9 @@ int cli_help()
 {
 	puts("List of commands:");
 
-	puts("help          -> prints this message");
-	puts("lex <file>    -> prints the tokens");
-	puts("(more will come)");
+	puts("\thelp          -> prints this message");
+	puts("\tlex <file>    -> prints the tokens");
+	puts("\t(more will come)\n");
 
 	return EXIT_SUCCESS;
 }
@@ -48,8 +48,13 @@ int cli_lex_$file(char *fpath)
 		return EXIT_FAILURE;
 	}
 
-	puts(src);
+	lex_t lex = new_lex(src);
 
-	free(src);
+	while (lex.type != T_EOF && lex.type != T_ERR) {
+		lex_next(&lex);
+		lex_print(&lex);
+	}
+
+	free_lex(&lex);
 	return EXIT_SUCCESS;
 }
