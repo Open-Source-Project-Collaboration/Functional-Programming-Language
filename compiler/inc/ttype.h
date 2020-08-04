@@ -12,6 +12,7 @@
 	X(PENDING)\
 	X(ERR)\
 	X(EOF)\
+	X(EOL)\
 	X(INDENT)\
 	X(DEDENT)\
 	\
@@ -24,6 +25,8 @@
 	\
 	/* keywords */\
 	X(LET)\
+	X(FOR)\
+	X(WHILE)\
 	X(MUT)\
 	X(MOD)\
 	X(USE)\
@@ -36,10 +39,23 @@
 	X(LPAR)\
 	X(RPAR)\
 	X(LBRAC)\
-	X(LBRAC)\
+	X(RBRAC)\
 	X(SEMI)\
+	X(BAR)\
 	X(PIPE)\
 	X(ARROW)\
+	\
+	/* logic ops */\
+	X(IN)\
+	X(NOT)\
+	X(DEQ)\
+	X(NOTEQ)\
+	X(AND)\
+	X(OR)\
+	X(LESS)\
+	X(LESSEQ)\
+	X(GREAT)\
+	X(GREATEQ)\
 	\
 	/* math ops */\
 	X(EQ)\
@@ -55,17 +71,6 @@
 	X(SLASHEQ)\
 	X(DSLASH)\
 	X(DSLASHEQ)\
-	\
-	/* logic ops */\
-	X(DEQ)\
-	X(NOTEQ)\
-	X(AND)\
-	X(OR)\
-	X(NOT)\
-	X(LESS)\
-	X(LESSEQ)\
-	X(GREATER)\
-	X(GREATEREQ)\
 	\
 	X(LAST)
 

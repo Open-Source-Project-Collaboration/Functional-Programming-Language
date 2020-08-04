@@ -1,6 +1,7 @@
 #ifndef FPL_COMPILER_LEXER_H
 #define FPL_COMPILER_LEXER_H
 
+#include <ctype.h>
 #include "common.h"
 #include "helpers.h"
 #include "ttype.h"
@@ -9,12 +10,11 @@
 /* lexer */
 typedef struct {
 	char *src, *srci;
-	char *buf, *bufi;
 	pos_t ipos;
 
 	pos_t pos;
 	ttype_t type;
-	char *val;
+	char *val, *vali;
 
 	size_t i_len, i_dep;
 } lex_t;
