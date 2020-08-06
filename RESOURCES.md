@@ -9,6 +9,7 @@ This is a currated list of resources used by the contributors:
 - Functional parsing by computerphile: https://www.youtube.com/watch?v=dDtZLm7HIJs&t=1173s
 - Creating a VM by jepthai: https://www.youtube.com/watch?v=DUNkdl0Jhgs
 - Also another VM by Philip Bohun: https://www.youtube.com/watch?v=BNXP0w4Ppto
+- Parsing by computerphile: https://youtu.be/r6vNthpQtSI
 
 
 ## Books and articles
