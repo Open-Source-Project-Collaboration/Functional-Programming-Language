@@ -15,6 +15,8 @@ int main(int argc, char **argv)
 		return cli_help();
 	else if (strcmp(cmd, "lex") == 0)
 		return cli_lex_$file(argv[2]);
+	else if (strcmp(cmd, "parse") == 0)
+		return cli_parse_$file(argv[2]);
 
 	return cli_unknown(argv[2]);
 }
@@ -56,5 +58,27 @@ int cli_lex_$file(char *fpath)
 	}
 
 	free_lex(&lex);
+	return EXIT_SUCCESS;
+}
+
+int cli_parse_$file(char *fpath)
+{
+	char *src = ftos(fpath);
+	if (src == NULL) {
+		printf("ERROR: Failed to open file '%s'\n", fpath);
+		return EXIT_FAILURE;
+	}
+
+	parser_t parser = new_parser(src);
+
+	if (parser.state == P_ERROR) {
+		puts("An error occured");
+		free_parser(&parser);
+		return EXIT_FAILURE;
+	}
+
+	print_node(&parser.ast);
+
+	free_parser(&parser);
 	return EXIT_SUCCESS;
 }

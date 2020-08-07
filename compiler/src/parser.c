@@ -6,7 +6,8 @@ parser_t new_parser(char *src)
 	parser_t parser = {
 
 		.state = P_PENDING,
-		.lex = new_lex(src)
+		.lex = new_lex(src),
+		.ast = new_node((pos_t){0, 0}, T_AST, NULL)
 
 	};
 
@@ -30,6 +31,7 @@ parser_t new_parser(char *src)
 void free_parser(parser_t *parser)
 {
 	free_lex(&parser->lex);
+	free_node(&parser->ast);
 }
 
 
@@ -41,7 +43,25 @@ bool parser_match(parser_t *parser, size_t count, ...)
 
 void parser_shift(parser_t *parser)
 {
-	parser->state = P_DONE;
+	lex_next(&parser->lex);
+
+	if (parser->lex.type == T_EOF) {
+		parser->state = P_DONE;
+		return;
+	} else if (parser->lex.type == T_ERR) {
+		parser->state = P_ERROR;
+		return;
+	}
+
+
+	node_t next = new_node(
+		parser->lex.pos,
+		parser->lex.type,
+		strdup(parser->lex.val)
+	);
+
+	node_push(&parser->ast, next);
+	parser->state = P_REDUCE;
 }
 
 

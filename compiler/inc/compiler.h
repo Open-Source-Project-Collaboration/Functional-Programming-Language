@@ -1,3 +1,3 @@
-#include "lexer.h"
+#include "parser.h"
 
 int compiler_main();
