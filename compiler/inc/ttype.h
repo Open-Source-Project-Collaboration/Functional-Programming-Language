@@ -72,6 +72,9 @@
 	X(DSLASH)\
 	X(DSLASHEQ)\
 	\
+	/* ast misc */\
+	X(AST)\
+	\
 	X(LAST)
 
 

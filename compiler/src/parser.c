@@ -6,9 +6,14 @@ parser_t new_parser(char *src)
 	parser_t parser = {
 
 		.state = P_PENDING,
-		.lex = new_lex(src)
+		.lex = new_lex(src),
+		.buf = new_nodebuf(strlen(src)),
 
 	};
+
+	/* set ast */
+	parser.ast = nodebuf_next(&parser.buf);
+	parser.ast->type = T_AST;
 
 	/* parse the thing */
 	parser.state = P_SHIFT;
@@ -41,7 +46,19 @@ bool parser_match(parser_t *parser, size_t count, ...)
 
 void parser_shift(parser_t *parser)
 {
-	parser->state = P_DONE;
+	lex_next(&parser->lex);
+
+	if (parser->lex.type == T_ERR) {
+		parser->state = P_ERROR;
+		return;
+	}
+
+	node_t *next = nodebuf_next(&parser->buf);
+	next->pos = parser->lex.pos;
+	next->type = parser->lex.type;
+	next->val = strdup(parser->lex.val);
+
+	nodevec_push(&parser->ast.vec, next);
 }
 
 
