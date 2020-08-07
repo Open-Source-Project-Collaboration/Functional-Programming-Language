@@ -40,6 +40,12 @@ void node_push(node_t *node, node_t child)
 }
 
 
+node_t node_pop(node_t *node)
+{
+	return node->ns[--node->ns_len];
+}
+
+
 void print_node(node_t *node)
 {
 	return _print_node(node, 0);

@@ -28,6 +28,7 @@ void free_node(node_t *node);
 
 /* methods */
 void node_push(node_t *node, node_t child);
+node_t node_pop(node_t *node);
 
 /* debug methods */
 void print_node(node_t *node);

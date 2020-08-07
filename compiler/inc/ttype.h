@@ -22,6 +22,7 @@
 	X(FLOAT)\
 	X(STR)\
 	X(BOOL)\
+	X(ARRAY)\
 	\
 	/* keywords */\
 	X(LET)\
@@ -74,6 +75,7 @@
 	\
 	/* ast misc */\
 	X(AST)\
+	X(DOTOP)\
 	\
 	X(LAST)
 

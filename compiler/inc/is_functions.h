@@ -9,5 +9,8 @@
 	TTYPES
 #undef X
 
+bool is_primitive(ttype_t type);
+bool is_dotop(ttype_t type);
+
 
 #endif
