@@ -2,6 +2,7 @@
 #define FPL_COMPILER_PARSER_H
 
 #include <stdarg.h>
+#include <unistd.h>
 #include "lexer.h"
 #include "is_functions.h"
 #include "node.h"
@@ -32,6 +33,9 @@ void free_parser(parser_t *parser);
 
 /* methods */
 bool parser_match(parser_t *parser, size_t count, ...);
+void parser_push(parser_t *parser, node_t node);
+node_t parser_pop(parser_t *parser);
+
 void parser_shift(parser_t *parser);
 void parser_reduce(parser_t *parser);
 

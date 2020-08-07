@@ -47,6 +47,7 @@ void lex_next(lex_t *lex)
 
 	/* reset buffer */
 	lex->vali = lex->val;
+	*lex->val = '\0';
 
 	/* skip whitespace */
 	while (*lex->srci == ' ' || *lex->srci == '\t')
