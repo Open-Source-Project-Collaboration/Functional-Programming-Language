@@ -17,7 +17,7 @@ struct node_t {
 	char *val;
 
 	/* children */
-	node_t **ns;
+	node_t *ns;
 	size_t ns_len, ns_cap;
 
 };
@@ -27,7 +27,7 @@ node_t new_node(pos_t pos, ttype_t type, char *val);
 void free_node(node_t *node);
 
 /* methods */
-void node_push(node_t *node, node_t *child);
+void node_push(node_t *node, node_t child);
 
 /* debug methods */
 void print_node(node_t *node);

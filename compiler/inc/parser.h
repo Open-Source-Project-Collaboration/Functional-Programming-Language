@@ -3,7 +3,7 @@
 
 #include "lexer.h"
 #include "is_functions.h"
-#include "nodebuf.h"
+#include "node.h"
 
 
 /* parser state */
@@ -21,8 +21,7 @@ typedef struct {
 	/* parser state */
 	pstate_t state;
 	lex_t lex;
-	nodebuf_t buf;
-	node_t *ast;
+	node_t ast;
 
 } parser_t;
 
