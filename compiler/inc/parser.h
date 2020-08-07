@@ -1,6 +1,7 @@
 #ifndef FPL_COMPILER_PARSER_H
 #define FPL_COMPILER_PARSER_H
 
+#include <stdarg.h>
 #include "lexer.h"
 #include "is_functions.h"
 #include "node.h"

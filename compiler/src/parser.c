@@ -37,7 +37,28 @@ void free_parser(parser_t *parser)
 
 bool parser_match(parser_t *parser, size_t count, ...)
 {
-	return false;
+	if (count >= parser->ast.ns_len)
+		return false;
+
+	va_list args;
+	va_start(args, count);
+
+	while (count != 0) {
+		bool (*type_is)(ttype_t) = va_arg(args, bool (*)(ttype_t));
+
+		size_t expected_idx = parser->ast.ns_len - count - 1;
+		ttype_t expected = parser->ast.ns[expected_idx].type;
+
+		if (type_is(expected) == false) {
+			va_end(args);
+			return false;
+		}
+
+		count--;
+	}
+
+	va_end(args);
+	return true;
 }
 
 
