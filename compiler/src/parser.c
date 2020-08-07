@@ -46,23 +46,27 @@ bool parser_match(parser_t *parser, size_t count, ...)
 
 void parser_shift(parser_t *parser)
 {
-	lex_next(&parser->lex);
-
-	if (parser->lex.type == T_ERR) {
+	if (parser->lex.type == T_EOF) {
+		parser->state = P_DONE;
+		return;
+	} else if (parser->lex.type == T_ERR) {
 		parser->state = P_ERROR;
 		return;
 	}
+
+	lex_next(&parser->lex);
 
 	node_t *next = nodebuf_next(&parser->buf);
 	next->pos = parser->lex.pos;
 	next->type = parser->lex.type;
 	next->val = strdup(parser->lex.val);
 
-	nodevec_push(&parser->ast.vec, next);
+	node_push(parser->ast, next);
+	parser->state = P_REDUCE;
 }
 
 
 void parser_reduce(parser_t *parser)
 {
-	parser->state = P_DONE;
+	parser->state = P_SHIFT;
 }

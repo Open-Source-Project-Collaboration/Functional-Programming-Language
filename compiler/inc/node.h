@@ -2,6 +2,7 @@
 #define FPL_COMPILER_NODE_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "common.h"
 #include "ttype.h"
 

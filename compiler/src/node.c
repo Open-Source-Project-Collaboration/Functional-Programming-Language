@@ -32,7 +32,7 @@ void node_push(node_t *node, node_t *child)
 		node->ns = realloc(node->ns, node->ns_cap * sizeof(node_t *));
 	}
 
-	node->ns[node->ns_len++] = node;
+	node->ns[node->ns_len++] = child;
 }
 
 
@@ -56,6 +56,6 @@ void _print_node(node_t *node, size_t indent)
 		node->val
 	);
 
-	for (i = 0; i < node->vec.len; i++)
-		_print_node(node->vec.ns[i], indent + 1);
+	for (i = 0; i < node->ns_len; i++)
+		_print_node(node->ns[i], indent + 1);
 }
