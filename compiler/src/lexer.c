@@ -255,3 +255,13 @@ void lex_next(lex_t *lex)
 		lex->type = T_ERR,
 		sprintf(lex->val, "Unexpected char '%c'", *lex->srci);
 }
+
+
+ttype_t lex_peek(lex_t *lex)
+{
+	char *backup = lex->srci;
+	lex_next(lex);
+	ttype_t peek = lex->type;
+	lex->srci = backup;
+	return peek;
+}
