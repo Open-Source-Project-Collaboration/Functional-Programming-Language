@@ -21,12 +21,14 @@ let sqr x =
 
 
 # File IO
+mod fs
+
 let filename = 'design.fpl'
-let file = open(filename)
+let file = fs.open filename
 
 # Conditional flow
 if file.is_open:
-	file.size |> str |> print
+	print file.size
 	file.close()
 else:
 	print 'Can not open file'
@@ -35,22 +37,21 @@ else:
 # Loops
 let arr = [1; 2; 3; 4]
 for num in arr:
-	num |> str |> print
+	print num
 
 let mut i = 0
 while i < 10:
-	print "Meow"
+	print 'Meow'
 	i += 1
 
 
 # Importing modules
 mod math
-use math.sqrt
 
 let twenty_five = sqr 5
-let five = sqrt twenty_five
+let five = math.sqrt twenty_five
 
-five |> str |> print	# prints 5
+print five
 
 
 # Enums
