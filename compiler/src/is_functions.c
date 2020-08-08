@@ -9,14 +9,15 @@ bool is_##t(ttype_t type)\
 
 TTYPES
 
-bool is_primitive(ttype_t type)
-{
-	return type >= T_NAME && type <= T_ARRAY;
-}
 
 bool is_dotop(ttype_t type)
 {
 	return type == T_DOTOP || type == T_NAME;
+}
+
+bool is_primitive(ttype_t type)
+{
+	return type >= T_NAME && type <= T_ARRAY;
 }
 
 
