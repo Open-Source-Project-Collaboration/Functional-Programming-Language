@@ -75,6 +75,9 @@
 	\
 	/* ast misc */\
 	X(AST)\
+	\
+	X(FCALL)\
+	X(ARG)\
 	X(DOTOP)\
 	\
 	X(LAST)

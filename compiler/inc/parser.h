@@ -4,24 +4,13 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "lexer.h"
-#include "is_functions.h"
 #include "node.h"
 
-
-/* parser state */
-typedef enum {
-	P_PENDING,
-	P_ERROR,
-	P_DONE,
-	P_SHIFT,
-	P_REDUCE
-} pstate_t;
 
 /* parser */
 typedef struct {
 
 	/* parser state */
-	pstate_t state;
 	lex_t lex;
 	node_t ast;
 
@@ -32,12 +21,7 @@ parser_t new_parser(char *src);
 void free_parser(parser_t *parser);
 
 /* methods */
-bool parser_match(parser_t *parser, size_t count, ...);
-void parser_push(parser_t *parser, node_t node);
-node_t parser_pop(parser_t *parser);
-
-void parser_shift(parser_t *parser);
-void parser_reduce(parser_t *parser);
+void parser_parse(parser_t *parser);
 
 
 #endif
