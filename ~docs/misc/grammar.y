@@ -95,12 +95,8 @@ block <- INDENT statemets DEDENT
 
 
 # Function calls
-fcall <- dotop [args]
-       | dotop '(' [args] ')'
-
-args <- args arg
-      | arg arg
-      | arg
+fcall <- fcall arg
+       | dotop arg
 
 arg <- '(' pipe ')'
      | primitive
