@@ -1,19 +1,19 @@
 # General stuff
 statements <- statements statement
             | statement statement
-	    | statement
+            | statement
 
 statement <- comment
            | fcall
-	   | def
-	   | if
-	   | for
-	   | while
-	   | mod
-	   | use
-	   | type
-	   | match
-	   | 'empty'
+           | def
+           | if
+           | for
+           | while
+           | mod
+           | use
+           | type
+           | match
+           | 'empty'
 
 comment <- r'#.*\n'
 
@@ -25,7 +25,7 @@ matchbody <- INDENT match_statements DEDENT
 
 match_statements <- match_statements match_statement
                   | match_statement match_statement
-		  | match_statement
+                  | match_statement
 
 match_statement <- NAME '=>' defbody
 
@@ -41,7 +41,7 @@ struct <- INDENT structdefs DEDENT
 
 structdefs <- structdefs structdef
             | structdef structdef
-	    | structdef
+            | structdef
 
 structdef <- NAME ':' TYPE
            | 'empty'
@@ -80,7 +80,7 @@ def <- 'let' ['mut'] NAME ['<' NAME '>'] [defargs] '=' defbody
 
 defargs <- defargs defarg
           | defarg defarg
-	  | defarg
+          | defarg
 
 defarg <- NAME [':' TYPE]
 
@@ -133,7 +133,7 @@ literal <- fcall
 
 primitive <- NAME
            | INT
-	   | FLOAT
-	   | STR
-	   | BOOL
-	   | array
+           | FLOAT
+           | STR
+           | BOOL
+           | array
