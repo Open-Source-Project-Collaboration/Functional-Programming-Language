@@ -4,17 +4,19 @@
 #define FPL_DEFAULT_NS_CAP 20
 
 
-node_t new_node(pos_t pos, ttype_t type, char *val)
+node_t *new_node(pos_t pos, ttype_t type, char *val)
 {
-	return (node_t) {
+	node_t *node = malloc(sizeof(node_t));
+	*node = (node_t) {
 		.pos = pos,
 		.type = type,
 		.val = val,
 
-		.ns = calloc(FPL_DEFAULT_NS_CAP, sizeof(node_t)),
+		.ns = calloc(FPL_DEFAULT_NS_CAP, sizeof(node_t*)),
 		.ns_len = 0,
 		.ns_cap = FPL_DEFAULT_NS_CAP
 	};
+	return node;
 }
 
 
@@ -22,14 +24,15 @@ void free_node(node_t *node)
 {
 	size_t i;
 	for (i = 0; i < node->ns_len; i++)
-		free_node(node->ns + i);
+		free_node(node->ns[i]);
 
 	free(node->val);
 	free(node->ns);
+	free(node);
 }
 
 
-void node_push(node_t *node, node_t child)
+void node_push(node_t *node, node_t *child)
 {
 	if (node->ns_len > node->ns_cap / 2) {
 		node->ns_cap *= 2;
@@ -40,7 +43,7 @@ void node_push(node_t *node, node_t child)
 }
 
 
-node_t node_pop(node_t *node)
+node_t *node_pop(node_t *node)
 {
 	return node->ns[--node->ns_len];
 }
@@ -67,5 +70,5 @@ void _print_node(node_t *node, size_t indent)
 	);
 
 	for (i = 0; i < node->ns_len; i++)
-		_print_node(node->ns + i, indent + 1);
+		_print_node(node->ns[i], indent + 1);
 }

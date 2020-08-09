@@ -70,8 +70,11 @@ int cli_parse_$file(char *fpath)
 	}
 
 	lex_t lex = new_lex(src);
-	parse_statements(&lex);
+	node_t *ast = parse(&lex);
 
+	print_node(ast);
+
+	free_node(ast);
 	free_lex(&lex);
 	return EXIT_SUCCESS;
 }

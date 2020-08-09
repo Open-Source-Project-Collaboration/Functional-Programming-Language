@@ -17,18 +17,18 @@ struct node_t {
 	char *val;
 
 	/* children */
-	node_t *ns;
+	node_t **ns;
 	size_t ns_len, ns_cap;
 
 };
 
 /* constructor & destructor */
-node_t new_node(pos_t pos, ttype_t type, char *val);
+node_t *new_node(pos_t pos, ttype_t type, char *val);
 void free_node(node_t *node);
 
 /* methods */
-void node_push(node_t *node, node_t child);
-node_t node_pop(node_t *node);
+void node_push(node_t *node, node_t *child);
+node_t *node_pop(node_t *node);
 
 /* debug methods */
 void print_node(node_t *node);

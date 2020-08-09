@@ -74,7 +74,7 @@
 	X(DSLASHEQ)\
 	\
 	/* ast misc */\
-	X(STATEMENTS)\
+	X(STMT)\
 	\
 	X(LAST)
 
