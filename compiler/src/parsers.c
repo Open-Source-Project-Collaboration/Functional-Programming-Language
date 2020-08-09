@@ -13,7 +13,7 @@ node_t *parse_many(lex_t *lex, node_t *(*fn)(lex_t *))
 	node_t *many = new_node((pos_t){0, 0}, T_STMT, NULL);
 	node_t *single = NULL;
 
-	while (single = fn(lex))
+	while ((single = fn(lex)))
 		node_push(many, single);
 
 	return many;
