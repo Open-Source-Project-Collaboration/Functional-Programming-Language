@@ -74,8 +74,7 @@
 	X(DSLASHEQ)\
 	\
 	/* ast misc */\
-	X(AST)\
-	X(DOTOP)\
+	X(STATEMENTS)\
 	\
 	X(LAST)
 

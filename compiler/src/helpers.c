@@ -21,7 +21,7 @@ char *ftos(char *fpath)
 
 char *strdup(char *s)
 {
-	if (s == NULL)
+	if (s == NULL || strlen(s) == 0)
 		return NULL;
 
 	const size_t size = strlen(s);

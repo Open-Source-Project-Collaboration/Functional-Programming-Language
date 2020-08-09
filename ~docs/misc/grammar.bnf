@@ -1,0 +1,112 @@
+# General stuff
+<stmt> ::= <fcall>
+         | <def>
+         | <if>
+         | <for>
+         | <while>
+         | <mod>
+         | <use>
+         | <type>
+         | <match>
+	 | <EOL>
+
+
+# Matching
+<match> ::= 'match' <expr> ':' <matchbody>
+
+<matchbody> ::= INDENT <match_stmt>* DEDENT
+
+<match_stmt> ::= <NAME> '=>' <defbody>
+
+
+# Type definitions
+<type> ::= 'type' <NAME> '=' [<enum_or_struct>]
+
+<enum> ::= <NAME> '|' <enum>
+         | <NAME>
+
+<struct> ::= <INDENT> <structdef>* <DEDENT>
+
+<structdef> ::= <NAME> ':' <TYPE>
+              | 'empty'
+
+<enum_or_struct> ::= <enum> | <struct>
+
+
+# Importing modules
+<mod> ::= 'mod' <NAME>
+<use> ::= 'use' <dotop>
+
+
+# Loops
+<for> ::= 'for' <NAME> 'in' <lval> ':' <defbody>
+<while> ::= 'while' <condition> ':' <defbody>
+
+
+# Conditional flow
+<if> ::= 'if' <cond> ':' <block> [<elif_or_else>]
+
+<elif> ::= 'elif' <cond> ':' <block> [<elif_or_else>]
+
+<else> ::= 'else' ':' <block>
+
+<elif_or_else> ::= <elif> | <else>
+
+<cond> ::= <cond> LOGIC_OP <cond>
+         | <expr> CMP_OP <cond>
+	 | <expr>
+
+
+# Function/variable definitions
+<def> ::= 'let' ['mut'] <NAME> ['<' <NAME> '>'] [<defarg>*] '=' <defbody>
+
+<defarg> ::= <NAME> [':' <NAME>]
+
+<defbody> ::= <pipe>
+            | <block>
+
+<pipe> ::= <pipeable> '|>' <pipe>
+         | <pipeable>
+
+<pipeable> ::= <expr>
+             | <fcall>
+
+<block> ::= <INDENT> <stmt>* <DEDENT>
+
+
+# Function calls
+<fcall> ::= <dotop> <arg>*
+
+<arg> ::= '(' <pipe> ')'
+
+
+# Dot operator
+<dotop> ::= <NAME> '.' <dotop>
+          | <NAME>
+
+
+# Math
+<expr> ::= <term> '+' <expr>
+         | <term> '-' <expr>
+         | <term>
+
+<term> ::= <fact> '*' <term>
+         | <fact> '/' <term>
+         | <fact>
+
+<fact> ::= '(' <pipe> ')'
+         | <literal>
+
+
+# Literals
+<array> ::= "[" <pair> "]"
+
+<pair> ::= <pipe> ";" <pair>
+         | <pipe> ";" <pipe>
+
+<literal> ::= <NAME>
+            | <INT>
+            | <FLOAT>
+            | <STR>
+            | <BOOL>
+            | <array>

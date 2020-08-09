@@ -55,10 +55,7 @@ print five
 
 
 # Enums
-type Colours
-	= Red
-	| Green
-	| Blue
+type Colours = Red | Green | Blue
 
 
 # Matching enums

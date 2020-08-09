@@ -69,16 +69,9 @@ int cli_parse_$file(char *fpath)
 		return EXIT_FAILURE;
 	}
 
-	parser_t parser = new_parser(src);
+	lex_t lex = new_lex(src);
+	parse_statements(&lex);
 
-	if (parser.state == P_ERROR) {
-		puts("An error occured");
-		free_parser(&parser);
-		return EXIT_FAILURE;
-	}
-
-	print_node(&parser.ast);
-
-	free_parser(&parser);
+	free_lex(&lex);
 	return EXIT_SUCCESS;
 }
