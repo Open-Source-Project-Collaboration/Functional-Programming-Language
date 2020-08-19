@@ -1,86 +1,77 @@
 # Comments are like this
-
-
-# Print function only accepts a string
 print 'Hello World!'
 
 
-# Variables
-let x: str = 'Hi World!'
+# Built-in types
+let n = 42
+let s = 'Hi World!'
+let b = true
 
 
-# This is mutable
-let mut y: int = 5
+# A mutable variable
+let mut x = 3.14
 
 
 # Functions
-let sqr x =
-	# It deduces type here
-	let x_again = x
-	x * x_again
+let sqr x = x * x
 
 
 # File IO
 mod fs
 
-let filename = 'design.fpl'
-let file = fs.open filename
+match fs.read 'design.fpl'
+| Some content -> print content
+| None         ->
+	print 'Failed to read file'
 
-# Conditional flow
-if file.is_open:
-	print file.size
-	file.close()
-else:
-	print 'Can not open file'
+
+# Lists
+[1; 2; 3; 4] |> List.map print
 
 
 # Loops
-let arr = [1; 2; 3; 4]
-for num in arr:
-	print num
-
-let mut i = 0
-while i < 10:
-	print 'Meow'
-	i += 1
-
-
-# Importing modules
-mod math
-
-let twenty_five = sqr 5
-let five = math.sqrt twenty_five
-
-print five
+[1..10] |> List.map (fun _ -> print 'Bark')
 
 
 # Enums
-type Colours = Red | Green | Blue
+type Colours
+	= Red
+	| Green
+	| Blue
 
 
 # Matching enums
-let colour = Colours.Red
-match colour:
-	Red =>
-		print 'It is red'
-	Green =>
-		print 'It is green'
-	Blue =>
-		print 'It is blue'
-	_ =>
-		print 'THERE IS NO SUCH COLOUR'
+match Enum.random Colours
+| Colours.Red   -> print 'It is an error'
+| Colours.Green -> print 'It is a warning'
+| Colours.Blue  -> print 'It is a success'
+| _             -> print 'THERE IS NO SUCH COLOUR'
 
 
-# Struct/class alike models
+# Struct alike models
 type Dog =
-	skin_colour: Colour
+	colour: Colours
 	size: int
 
+	# Constructor
+	let new size =
+		Dog {
+			size: size,
+			colour: Enum.random Colours
+		}
+
+	# Method
+	let bark<self> what_to_bark =
+		print 'Dog, {self.size} with colour {self.colour} says {what_to_bark}'
+
+	# Static method
+	let copy dog =
+		Dog { size: dog.size, colour: dog.colour }
+
+
 # Initializing new models
-let barry = Dog.new Colours.Red 42
-
-# Methods for models
-let bark<Dog> what_to_bark =
-	print 'Dog, {self.size} with colour {self.colour} says {what_to_bark}'
-
+let barry = Dog { colour: Colours.Red, size: 10 }
 barry.bark 'MY NAME IS BARRY'
+
+let barrys_copy = Dog.copy barry
+barrys_copy.bark 'MY NAME IS THAT TOO'
