@@ -1,112 +1,96 @@
-# General stuff
-<stmt> ::= <fcall>
-         | <def>
-         | <if>
-         | <for>
-         | <while>
-         | <mod>
-         | <use>
-         | <type>
+# top-level
+<stmts> ::= { <stmt> }
+
+[disable_indentation, enable_eol]
+<stmt> ::= <COMMENT>
+         | <fcall>
+         | <expr>
+         | <fdef>
+         | <moduse>
          | <match>
-	 | <EOL>
+         | <pipe>
+         | <type>
+         | 'pass'
+         | <eox>
+
+<eox> ::= <EOL> | <EOF>
 
 
-# Matching
-<match> ::= 'match' <expr> ':' <matchbody>
+# fcall
+<fcall> ::= <dotop> { <arg> }
 
-<matchbody> ::= INDENT <match_stmt>* DEDENT
+<dotop> ::= <NAME> ['.' <dotop>]
 
-<match_stmt> ::= <NAME> '=>' <defbody>
+<arg> ::= '(' <expr> ')'
+        | <literal>
 
-
-# Type definitions
-<type> ::= 'type' <NAME> '=' [<enum_or_struct>]
-
-<enum> ::= <NAME> '|' <enum>
-         | <NAME>
-
-<struct> ::= <INDENT> <structdef>* <DEDENT>
-
-<structdef> ::= <NAME> ':' <TYPE>
-              | 'empty'
-
-<enum_or_struct> ::= <enum> | <struct>
-
-
-# Importing modules
-<mod> ::= 'mod' <NAME>
-<use> ::= 'use' <dotop>
-
-
-# Loops
-<for> ::= 'for' <NAME> 'in' <lval> ':' <defbody>
-<while> ::= 'while' <condition> ':' <defbody>
-
-
-# Conditional flow
-<if> ::= 'if' <cond> ':' <block> [<elif_or_else>]
-
-<elif> ::= 'elif' <cond> ':' <block> [<elif_or_else>]
-
-<else> ::= 'else' ':' <block>
-
-<elif_or_else> ::= <elif> | <else>
-
-<cond> ::= <cond> LOGIC_OP <cond>
-         | <expr> CMP_OP <cond>
-	 | <expr>
-
-
-# Function/variable definitions
-<def> ::= 'let' ['mut'] <NAME> ['<' <NAME> '>'] [<defarg>*] '=' <defbody>
-
-<defarg> ::= <NAME> [':' <NAME>]
-
-<defbody> ::= <pipe>
-            | <block>
-
-<pipe> ::= <pipeable> '|>' <pipe>
-         | <pipeable>
-
-<pipeable> ::= <expr>
-             | <fcall>
-
-<block> ::= <INDENT> <stmt>* <DEDENT>
-
-
-# Function calls
-<fcall> ::= <dotop> <arg>*
-
-<arg> ::= '(' <pipe> ')'
-
-
-# Dot operator
-<dotop> ::= <NAME> '.' <dotop>
-          | <NAME>
-
-
-# Math
-<expr> ::= <term> '+' <expr>
-         | <term> '-' <expr>
+<expr> ::= <term> ('+' | '-') <expr>
          | <term>
 
-<term> ::= <fact> '*' <term>
-         | <fact> '/' <term>
+<term> ::= <fact> ('*' | '/') <term>
          | <fact>
 
-<fact> ::= '(' <pipe> ')'
+<fact> ::= '(' <expr> ')'
+         | <fcall>
          | <literal>
 
-
-# Literals
-<array> ::= "[" <pair> "]"
-
-<pair> ::= <pipe> ";" <pair>
-         | <pipe> ";" <pipe>
-
 <literal> ::= <NAME>
-            | <INT>
-            | <FLOAT>
+            | ['-'] <NUM>
             | <STR>
             | <BOOL>
+            | <NONE>
             | <array>
+
+<array> ::= '[' <arraypair> ']'
+
+<arraypair> ::= <expr> [';' <arraypair>]
+
+
+# fdef
+<fdef> ::= 'let' ['mut'] <NAME> ['<' <dotop> '>'] { <NAME> } '=' <fbody>
+
+[enable_indentation]
+<fbody> ::= <INDENT> ('pass' | { <stmt> }) <DEDENT>
+          | <expr>
+
+
+# mod
+<moduse> ::= <mod> | <use>
+
+<mod> ::= 'mod' <NAME> <EOL>
+
+<use> ::= 'use' <dotop> <EOL>
+
+
+# match
+<match> ::= 'match' <expr> <matchbranch> { <matchbranch> }
+
+<matchbranch> ::= '|' <matchcase> '->' <fbody>
+
+<matchcase> ::= <dotop> <NAME>
+              | <NAME>
+              | <literal>
+              | '_'
+
+
+# pipe
+<pipe> ::= <expr> ['|>' <pipe>]
+
+
+# type
+[disable_eol]
+<type> ::= 'type' <NAME> '=' <typebody>
+
+<typebody> ::= <enumbody> | <modelbody>
+
+<enumbody> ::= <NAME> '|' <enumbody>
+             | <NAME>
+
+[enable_indentation, enable_eol]
+<modelbody> ::= <INDENT> <modelstmt> <DEDENT>
+
+<modelstmt> ::= <COMMENT>
+              | <fdef>
+              | <mdef> <EOL>
+
+<mdef> ::= <NAME> ':' <dotop>
