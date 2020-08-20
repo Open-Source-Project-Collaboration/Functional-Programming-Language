@@ -13,10 +13,6 @@ int main(int argc, char **argv)
 	/* check the command */
 	if (strcmp(cmd, "help") == 0)
 		return cli_help();
-	else if (strcmp(cmd, "lex") == 0)
-		return cli_lex_$file(argv[2]);
-	else if (strcmp(cmd, "parse") == 0)
-		return cli_parse_$file(argv[2]);
 
 	return cli_unknown(argv[2]);
 }
@@ -35,46 +31,7 @@ int cli_help()
 	puts("List of commands:");
 
 	puts("\thelp          -> prints this message");
-	puts("\tlex <file>    -> prints the tokens");
 	puts("\t(more will come)\n");
 
-	return EXIT_SUCCESS;
-}
-
-
-int cli_lex_$file(char *fpath)
-{
-	char *src = ftos(fpath);
-	if (src == NULL) {
-		printf("ERROR: Failed to open file '%s'\n", fpath);
-		return EXIT_FAILURE;
-	}
-
-	lex_t lex = new_lex(src);
-
-	while (lex.type != T_EOF && lex.type != T_ERR) {
-		lex_next(&lex);
-		lex_print(&lex);
-	}
-
-	free_lex(&lex);
-	return EXIT_SUCCESS;
-}
-
-int cli_parse_$file(char *fpath)
-{
-	char *src = ftos(fpath);
-	if (src == NULL) {
-		printf("ERROR: Failed to open file '%s'\n", fpath);
-		return EXIT_FAILURE;
-	}
-
-	lex_t lex = new_lex(src);
-	node_t *ast = parse(&lex);
-
-	print_node(ast);
-
-	free_node(ast);
-	free_lex(&lex);
 	return EXIT_SUCCESS;
 }
