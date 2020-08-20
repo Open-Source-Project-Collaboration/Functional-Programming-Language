@@ -40,10 +40,19 @@
             | <BOOL>
             | <NONE>
             | <array>
+	    | <lambda>
+	    | <modelinit>
 
 <array> ::= '[' <arraypair> ']'
 
 <arraypair> ::= <expr> [';' <arraypair>]
+
+<lambda> ::= 'fun' { <NAME> } '->' <expr>
+
+[disable_indentation, disable_eol]
+<modeinit> ::= <NAME> '{' { <modeinitfield> (',' | '}') }
+
+<modeinitfield> ::= <NAME> ':' <expr>
 
 
 # fdef
