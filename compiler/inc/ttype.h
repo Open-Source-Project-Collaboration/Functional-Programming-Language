@@ -74,7 +74,7 @@
 	X(DSLASHEQ)\
 	\
 	/* ast misc */\
-	X(STMT)\
+	X(STMTS)\
 	\
 	X(LAST)
 
